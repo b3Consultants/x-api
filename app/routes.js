@@ -25,6 +25,7 @@ module.exports = function(app) {
         res.status(500).send(err);
       } else {
         if (like.length != 0) {
+          console.log('hola');
           if (time - like.timestamp > 60) {
             Likes.create({
               ip_address: ip_address,
@@ -60,28 +61,5 @@ module.exports = function(app) {
         }
       }
     });
-    /*Session.find({
-        token: token
-    }).
-    exec(function(err, session) {
-        if (session.length == 0) {
-            res.status(400).send('Not a Valid Token');
-        }else if(err){
-            res.status(500).send("Error al encontrar la sesión");
-        } else {
-            Like.create({
-                user_id: user_id,
-                song: song,
-                liked: liked,
-                time: time,
-            }, function(err, like){
-                if(err){
-                    res.status(500).send("Error al agregar el voto");
-                }else{
-                    res.status(200);
-                }
-            });
-        }
-    });*/
   });
 };
