@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Like', {
-    user_id: {
+    ip_address: {
         type: String,
     },
     song: {
         type: String,
 
     },
-    time: {
+    timestamp: {
         type: Date,
     },
     liked:{

@@ -1,7 +1,5 @@
 module.exports = {
     secret: 'YjsrGUhqz95vtSEwWqSe',
-    remoteUrl : 'mongodb://b3Dev:d798fd798f@localhost:27017/laEquisDB',
-    localUrl: 'mongodb://b3Dev:d798fd798f@localhost:27017/laEquisDB'
+    remoteUrl : 'mongodb://lax:lax@localhost:27017/laxDB',
+    localUrl: 'mongodb://lax:lax@localhost:27017/laxDB'
 };
-
-
