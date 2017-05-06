@@ -42,7 +42,6 @@ module.exports = function(app) {
             res.status(404).send("Puedes votar cada 1 minuto :(");
           }
         } else {
-          console.log('hola');
           Likes.create({
             ip_address: ip_address,
             song: song_name,
