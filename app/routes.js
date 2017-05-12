@@ -1,4 +1,17 @@
-// used to serialize the user for the session
+var session = require('express-session');
+var MongoDBStore = require('connect-mongodb-session')(session);
+var database = require('../config/database'); // load the database config
+var store = new MongoDBStore({
+  uri: database.localUrl,
+  collection: 'Sessions'
+});
+
+// Catch errors
+store.on('error', function(error) {
+  assert.ifError(error);
+  assert.ok(false);
+});
+
 module.exports = function(app) {
 
   app.use(function(req, res, next) {
@@ -6,6 +19,18 @@ module.exports = function(app) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
   });
-  require('./controllers/likeController.js')(app);
+
+  app.use(require('express-session')({
+    secret: 'rhisismegasicretsexychambelain',
+    cookie: {
+      maxAge: 1000 * 60 * 60, // 1 hour
+      name: 'laxsupercookie',
+    },
+    store: store,
+    resave: true,
+    saveUninitialized: true,
+  }));
+
+  require('./controllers/votesController.js')(app, session);
 
 };
