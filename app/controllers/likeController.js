@@ -1,7 +1,7 @@
 var Likes = require('../models/like');
 
 module.exports = function(app) {
-    
+
     app.post('/api/likes/:lid/song/:song/address/:ip', (req, res) => {
         const like_id = req.params.lid;
         const song_name = req.params.song;
@@ -54,9 +54,55 @@ module.exports = function(app) {
           }
         });
       });
-    
-    
-    
-    
-    
+
+    app.get('/api/likes/:songName',(req,res)=> {
+      const songName = req.params.songName;
+      let mata=0;
+      let apesta=0;
+      Likes.find({song: songName },(err,likes)=>{
+          if(err){
+            res.status(500).send(err);
+          }
+          for (var i = 0; i < likes.length; i++) {
+            if(likes[i].liked =1){
+              mata++;
+            }else{
+              apesta++;
+            }
+          }
+          const response ={
+              apesta: apesta,
+              mata:mata
+          }
+          res.status(200).send(response);
+
+      })
+
+    });
+    app.get('/api/likes/',(req,res)=> {
+      const songName = req.params.songName;
+      let mata=0;
+      let apesta=0;
+      Likes.find({},(err,likes)=>{
+          if(err){
+            res.status(500).send(err);
+          }
+          for (var i = 0; i < likes.length; i++) {
+            if(likes[i].liked =1){
+              mata++;
+            }else{
+              apesta++;
+            }
+          }
+          const response ={
+              apesta: apesta,
+              mata:mata
+          }
+          res.status(200).send(response);
+
+      })
+
+    });
+
+
 }
