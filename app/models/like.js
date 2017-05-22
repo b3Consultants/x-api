@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Like', {
-    ip_address: {
+module.exports = mongoose.model('like', {
+    token: {
         type: String,
     },
     song: {
